@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { addStory } from "../api";
+import "./Share.css";
 
 export default function Share() {
 	const [story, setStory] = useState("");
