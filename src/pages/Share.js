@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { addStory } from "../api";
-import "./Share.css";
+// import "./Share.css";
 
 export default function Share() {
 	const [story, setStory] = useState("");
@@ -20,14 +20,25 @@ export default function Share() {
 		}
 	}, [story]);
 
+	// I used to have a lot of anxiety about tests. However, I found that breaking my studying into really small chunks helped me out a lot.
+
 	return <div style={{
 		display: "flex", flexDirection: "column", width: "40rem", margin: "1rem auto", alignItems: "center"
 	}}>
 		<h1>Share</h1>
-		<textarea value={story} onChange={e => setStory(e.target.value)} disabled={status === 'pending'} />
-		<button onClick={submitButton}>Submit</button>
-		{status === 'pending' && "Uploading..."}
-		{status === 'success' && "Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone."}
-		{status === 'error' && "We're sorry, something happened when uploading your story. Try again?"}
+		{status === 'success' ? <><p>Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.</p>
+			<button onClick={() => window.location.reload()}>Submit another</button>
+		</> :
+			<>
+				<textarea value={story} onChange={e => setStory(e.target.value)} disabled={status === 'pending'} style={{
+					fontSize: "1rem",
+					fontFamily: "inherit",
+					height: "150px",
+				}} />
+				<button onClick={submitButton} style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>Submit</button>
+				{status === 'pending' && <p>Uploading...</p>}
+				{status === 'error' && <p>We're sorry, something happened when uploading your story. Try again?</p>}
+			</>
+		}
 	</div>
 }

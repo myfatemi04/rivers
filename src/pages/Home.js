@@ -14,8 +14,8 @@ export default function Home() {
 				<span>What do you want to talk about?</span>
 			</div>
 			<div className="buttons">
-				<a href="/talk" className="talk"> Talk </a>
-				<a href="/share" className="share-story"> Share a story </a>
+				<a href="/talk" className="button"> Talk </a>
+				<a href="/share" className="button" style={{ marginLeft: "0.5rem" }}> Share a story </a>
 			</div>
 		</div>
 	);
