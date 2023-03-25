@@ -30,6 +30,16 @@ code {
   margin: 1rem 0;
 }
 
+.share-button {
+  width: 25rem;
+  background-color: rgba(60, 60, 200);
+  color: white;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;

@@ -1,9 +1,19 @@
-.text-input {
+.talk {
   border: 1px solid white;
   border-radius: 0.25rem;
   background-color: transparent;
   color: black;
   font-size: 2rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.share-story{
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: black;
+  font-size: 0.7rem;
   padding: 0.5rem;
   width: 100%;
 }
