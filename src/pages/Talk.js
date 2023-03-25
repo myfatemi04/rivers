@@ -33,7 +33,7 @@ export default function Talk() {
 	}, [initialMessage]);
 
 	return <div className="flex-col" style={{ alignItems: "center", flexGrow: 1, width: "calc(min(40rem, 100% - 2rem))", margin: "0 auto", padding: "1rem" }}>
-		<h1 style={{ margin: 0 }}>Talk</h1>
+		<h1>Talk</h1>
 		{initialMessage ? (
 			stories === null ?
 				<p>Connecting you to an AI</p> :
@@ -87,8 +87,13 @@ function TalkInner({ initialMessage, stories }) {
 	return <>
 		<ChatMessages messages={messages} assistantTyping={typing} />
 		<div style={{ display: "flex", marginTop: "1rem", width: "100%" }}>
-			<input type="text" className="chat-input" value={draft} onChange={e => setDraft(e.target.value)} style={{ flexGrow: 1 }} />
-			<button style={{ marginLeft: "0.5rem" }} onClick={submitMessage} className="chat-button" disabled={draft.length === 0}>Send</button>
+			<input type="text" className="chat-input" value={draft} onChange={e => setDraft(e.target.value)} style={{ flexGrow: 1 }} onKeyUp={e => {
+				if (e.key === 'Enter') {
+					if (draft.length > 0) {
+						submitMessage();
+					}
+				}
+			}} />
 		</div>
 	</>
 }

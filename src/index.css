@@ -30,14 +30,32 @@ code {
     monospace;
 }
 
+pre {
+  font-family: inherit;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* No background on scrollbar, but keep the thumb visible */
+::-webkit-scrollbar {
+  background: transparent;
+}
+
 .chat-message {
   width: 25rem;
-  background-color: rgba(60, 60, 200);
   color: white;
   display: inline-block;
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
+}
+
+.cm-user {
+  background-color: rgba(255, 56, 132, 0.621);
+}
+
+.cm-assistant {
+  background-color: rgba(255, 92, 155, 0.621);
 }
 
 .share-button {

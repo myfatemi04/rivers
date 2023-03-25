@@ -1,9 +1,17 @@
+const nameMap = {
+	assistant: "AI",
+	user: "You",
+}
+
 function ChatMessage({ message }) {
 	return <div style={{
 		display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
 	}}>
-		<span className="chat-message">
-			{message.content}
+		<span className={`chat-message cm-${message.role}`}>
+			<b>{nameMap[message.role]}</b><br />
+			<pre >
+				{message.content}
+			</pre>
 		</span>
 	</div>
 }
@@ -11,7 +19,7 @@ function ChatMessage({ message }) {
 export default function ChatMessages({ messages, assistantTyping }) {
 	return (
 		<div style={{
-			overflowY: "auto", width: "100%", flexGrow: 1
+			overflowY: "auto", width: "100%", flexGrow: 1, minHeight: 0,
 		}} className="flex-col">
 			{messages.map((message, index) => (
 				<ChatMessage key={index} message={message} />
