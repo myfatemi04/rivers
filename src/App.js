@@ -4,11 +4,14 @@ import Share from "./pages/Share";
 import Talk from "./pages/Talk";
 
 export default function App() {
-  return <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/share" element={<Share />} />
-      <Route path="/talk" element={<Talk />} />
-    </Routes>
-  </BrowserRouter>
+  return <div>
+    <p>This text will show up on all pages.</p>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/share" element={<Share />} />
+        <Route path="/talk" element={<Talk />} />
+      </Routes>
+    </BrowserRouter>
+  </div>
 }
