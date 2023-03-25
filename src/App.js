@@ -5,7 +5,6 @@ import Talk from "./pages/Talk";
 
 export default function App() {
   return <div>
-    <p>This text will show up on all pages.</p>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
