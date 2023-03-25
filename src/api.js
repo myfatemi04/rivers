@@ -15,9 +15,9 @@ export async function addStory(story) {
 }
 
 export async function chat(messages, retrievedStories) {
-	const result = await fetch('https://add-story-jxwxpho3rq-uk.a.run.app', {
+	const result = await fetch('https://chat-jxwxpho3rq-uk.a.run.app', {
 		method: "POST",
-		body: JSON.stringify({ messages, retrievedStories }),
+		body: JSON.stringify({ messages, retrieved_stories: retrievedStories }),
 		headers: {
 			"Content-Type": "application/json"
 		}
