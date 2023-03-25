@@ -1,7 +1,7 @@
 export default function ChatMessages({ messages }) {
 	return (
 		<div style={{
-			overflowY: "auto", width: "100%", flexGrow: 1, border: "1px solid white", borderRadius: "0.25rem", padding: "1rem"
+			overflowY: "auto", width: "100%", flexGrow: 1
 		}} className="flex-col">
 			{messages.map((message, index) => (
 				<div key={index} style={{

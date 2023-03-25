@@ -22,17 +22,38 @@ Chatbot: You're welcome. Remember, if you ever need someone to talk to, I'm alwa
 `.trim().split("\n\n").map(line => line.split(": ")).map(([role, content]) => ({ role: role === 'User' ? 'user' : 'assistant', content }));
 
 export default function Talk() {
-	const [messages, setMessages] = useState([]);
-	const [draft, setDraft] = useState("");
+	const [initialMessage, setInitialMessage] = useState("");
 	const [stories, setStories] = useState(null);
 
-	const firstMessageContent = messages.length > 0 ? messages[0].content : null;
-
 	useEffect(() => {
-		getStories(firstMessageContent).then(stories => {
-			setStories(stories);
-		});
-	}, [firstMessageContent]);
+		if (!initialMessage) {
+			return;
+		}
+		getStories(initialMessage).then(setStories);
+	}, [initialMessage]);
+
+	return <div className="flex-col" style={{ alignItems: "center", flexGrow: 1, width: "calc(min(40rem, 100% - 2rem))", margin: "0 auto", padding: "1rem" }}>
+		<h1 style={{ margin: 0 }}>Talk</h1>
+		{initialMessage ? (
+			stories === null ?
+				<p>Connecting you to an AI</p> :
+				<TalkInner initialMessage={initialMessage} stories={stories} />
+		) : (
+			<div style={{ width: "100%" }}>
+				<p>What's on your mind?</p>
+				<input type="text" onKeyUp={e => {
+					if (e.key === 'Enter') {
+						setInitialMessage(e.target.value);
+					}
+				}} />
+			</div>
+		)}
+	</div>
+}
+
+function TalkInner({ initialMessage, stories }) {
+	const [messages, setMessages] = useState([{ role: 'user', content: initialMessage }]);
+	const [draft, setDraft] = useState("");
 
 	const submitMessage = useCallback(() => {
 		if (!draft) {
@@ -43,16 +64,25 @@ export default function Talk() {
 		}
 		setMessages(messages => [...messages, { role: 'user', content: draft }]);
 		setDraft("");
-		chat(messages, stories).then((message) => setMessages(messages => [...messages, message]));
-	}, [draft, messages, stories]);
+	}, [draft, stories]);
 
-	return <div className="flex-col" style={{ alignItems: "center", flexGrow: 1, width: "calc(min(40rem, 100% - 2rem))", margin: "0 auto", padding: "1rem" }}>
-		<h1 style={{ margin: 0 }}>Talk</h1>
-		{stories === null ? <p>Loading...</p> : <p>Stories: {stories.length}</p>}
+	useEffect(() => {
+		if (stories === null) {
+			return;
+		}
+		if (messages.length === 0) {
+			return;
+		}
+		if (messages[messages.length - 1].role === 'user') {
+			chat(messages, stories).then((message) => setMessages(messages => [...messages, message]));
+		}
+	}, [messages, stories]);
+
+	return <>
 		<ChatMessages messages={messages} />
 		<div style={{ display: "flex", marginTop: "1rem", width: "100%" }}>
 			<input type="text" className="chat-input" value={draft} onChange={e => setDraft(e.target.value)} style={{ flexGrow: 1 }} />
-			<button style={{ marginLeft: "0.5rem" }} onClick={submitMessage} className="chat-button">Send</button>
+			<button style={{ marginLeft: "0.5rem" }} onClick={submitMessage} className="chat-button" disabled={draft.length === 0}>Send</button>
 		</div>
-	</div>
+	</>
 }
