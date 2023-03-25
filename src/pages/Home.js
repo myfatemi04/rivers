@@ -1,5 +1,12 @@
 export default function Home() {
-	return <div>
+	<link rel="stylesheet" href="Home.css"></link>
+	return (
+	  <div>
 		<h1>Home</h1>
-	</div>
-}
+		<div class="button-container">
+		  <button class="big-button">I want to talk.</button>
+		  <button class="big-button">I want to view other stories.</button>
+		</div>
+	  </div>
+	);
+  }

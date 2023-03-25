@@ -1,0 +1,25 @@
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: column;
+
+  }
+  
+  .big-button {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4136;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .big-button:hover {
+    background-color: #d30f00;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
