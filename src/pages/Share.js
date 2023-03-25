@@ -26,7 +26,7 @@ export default function Share() {
 		<textarea value={story} onChange={e => setStory(e.target.value)} disabled={status === 'pending'} />
 		<button onClick={submitButton}>Submit</button>
 		{status === 'pending' && "Uploading..."}
-		{status === 'success' && "Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.."}
+		{status === 'success' && "Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone."}
 		{status === 'error' && "We're sorry, something happened when uploading your story. Try again?"}
 	</div>
 }
