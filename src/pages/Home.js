@@ -1,5 +1,15 @@
+import { ButtonGroup } from "rsuite";
+import { Button, ButtonToolbar } from 'rsuite';
+import "rsuite/dist/rsuite.min.css";
+import "./Home.css";
 export default function Home() {
-	return <div>
-		<h1>Home</h1>
-	</div>
-}
+	return (
+	  <div className='button-container'>
+		<ButtonGroup vertical>
+		<Button appearance="primary">I want to talk.</Button>
+		<Button appearance="subtle">I want to share.</Button>
+		</ButtonGroup>
+	  </div>
+	);
+  }
+  
