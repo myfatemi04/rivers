@@ -54,6 +54,7 @@ export default function Talk() {
 function TalkInner({ initialMessage, stories }) {
 	const [messages, setMessages] = useState([{ role: 'user', content: initialMessage }]);
 	const [draft, setDraft] = useState("");
+	const [typing, setTyping] = useState(false);
 
 	const submitMessage = useCallback(() => {
 		if (!draft) {
@@ -74,12 +75,17 @@ function TalkInner({ initialMessage, stories }) {
 			return;
 		}
 		if (messages[messages.length - 1].role === 'user') {
-			chat(messages, stories).then((message) => setMessages(messages => [...messages, message]));
+			setTyping(true);
+			chat(messages, stories).then((message) => {
+				return setMessages(messages => [...messages, message]);
+			}).finally(() => {
+				setTyping(false);
+			});
 		}
 	}, [messages, stories]);
 
 	return <>
-		<ChatMessages messages={messages} />
+		<ChatMessages messages={messages} assistantTyping={typing} />
 		<div style={{ display: "flex", marginTop: "1rem", width: "100%" }}>
 			<input type="text" className="chat-input" value={draft} onChange={e => setDraft(e.target.value)} style={{ flexGrow: 1 }} />
 			<button style={{ marginLeft: "0.5rem" }} onClick={submitMessage} className="chat-button" disabled={draft.length === 0}>Send</button>
