@@ -12,8 +12,10 @@ export default function Home() {
 			<h1>Everyone's life flows a different way.</h1>
 			<div>
 				<span>What do you want to talk about?</span>
-				<input type="text" className="text-input" />
-				<a href="/share">Share a story</a>
+			</div>
+			<div className="buttons">
+				<a href="/talk" className="talk"> Talk </a>
+				<a href="/share" className="share-story"> Share a story </a>
 			</div>
 		</div>
 	);

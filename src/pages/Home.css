@@ -1,11 +1,37 @@
-.text-input {
+a:link { 
+  text-decoration: none; 
+}
+
+a:visited { 
+  text-decoration: none; 
+}
+
+a:hover { 
+  text-decoration: none; 
+}
+
+a:active { 
+  text-decoration: none; 
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.talk {
   border: 1px solid white;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: transparent;
-  color: black;
+  color: white;
   font-size: 2rem;
   padding: 0.5rem;
-  width: 100%;
+  width: 15rem;
+  text-align: center;
+  margin-right : 1rem;
 }
 
 .chat-input {
@@ -25,4 +51,15 @@
   color: white;
   font-size: 1rem;
   padding: 0.5rem 1rem;
+}
+.share-story{
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: white;
+  font-size: 2rem;
+  padding: 0.5rem;
+  width: 15rem;
+  text-align: center;
+  margin-left : 1rem;
 }
