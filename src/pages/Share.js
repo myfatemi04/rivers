@@ -1,34 +1,32 @@
-import { useState } from "react";
-import "rsuite/dist/rsuite.min.css";
-import "./Share.css";
+import { useCallback, useState } from "react";
+import { addStory } from "../api";
 
 export default function Share() {
-  const [story, setStory] = useState("");
+	const [story, setStory] = useState("");
+	const [status, setStatus] = useState("idle");
 
-  const handleStoryChange = (event) => {
-    setStory(event.target.value);
-  };
+	const submitButton = useCallback(async () => {
+		if (!story) {
+			return;
+		}
+		setStatus("pending");
+		try {
+			await addStory(story)
+			setStatus("success");
+			setStory("");
+		} catch (e) {
+			setStatus("error");
+		}
+	}, [story]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // PASS STORY TO BACKEND
-	
-  };
-
-  return (
-    <div className="share-container">
-      <h1>Share Your Story</h1>
-      <form className="share-form" onSubmit={handleSubmit}>
-        <label htmlFor="story">What do you want to talk about?</label>
-        <textarea
-          id="story"
-          name="story"
-          rows="5"
-          value={story}
-          onChange={handleStoryChange}
-        ></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
+	return <div style={{
+		display: "flex", flexDirection: "column", width: "40rem", margin: "1rem auto", alignItems: "center"
+	}}>
+		<h1>Share</h1>
+		<textarea value={story} onChange={e => setStory(e.target.value)} disabled={status === 'pending'} />
+		<button onClick={submitButton}>Submit</button>
+		{status === 'pending' && "Uploading..."}
+		{status === 'success' && "Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone."}
+		{status === 'error' && "We're sorry, something happened when uploading your story. Try again?"}
+	</div>
 }

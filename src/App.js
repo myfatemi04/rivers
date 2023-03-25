@@ -4,13 +4,14 @@ import Share from "./pages/Share";
 import Talk from "./pages/Talk";
 
 export default function App() {
-  return <div>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/share" element={<Share />} />
-        <Route path="/talk" element={<Talk />} />
-      </Routes>
-    </BrowserRouter>
-  </div>
+  /*
+  Linear gradient from #590898 to #FF560E at 45 degree angle
+  */
+  return <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/share" element={<Share />} />
+      <Route path="/talk" element={<Talk />} />
+    </Routes>
+  </BrowserRouter>
 }
