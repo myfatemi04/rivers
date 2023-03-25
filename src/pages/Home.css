@@ -31,6 +31,7 @@ a:active {
   padding: 0.5rem;
   width: 15rem;
   text-align: center;
+  margin-right : 1rem;
 }
 
 .share-story{
@@ -42,4 +43,5 @@ a:active {
   padding: 0.5rem;
   width: 15rem;
   text-align: center;
+  margin-left : 1rem;
 }
