@@ -5,19 +5,7 @@ import Share from "./pages/Share";
 import Talk from "./pages/Talk";
 import { useState } from "react";
 
-
 export default function App() {
-  /*
-  Linear gradient from #590898 to #FF560E at 45 degree angle
-  return <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/river" element={<River />} />
-      <Route path="/share" element={<Share />} />
-      <Route path="/talk" element={<Talk />} />
-    </Routes>
-  </BrowserRouter>
-  */
   const [currentPage, setCurrentPage] = useState("Home");
 
   const renderPage = () => {
@@ -33,12 +21,12 @@ export default function App() {
     }
   };
 
-    return (
+  return (
+    <BrowserRouter>
       <div className="container">
         <div className="animation"></div>
         <div className="content">{renderPage()}</div>
       </div>
-    );
-  }
-
-
+    </BrowserRouter>
+  );
+}
