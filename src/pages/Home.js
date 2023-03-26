@@ -9,7 +9,7 @@ export default function Home() {
 			<AnimatePresence mode="wait">
 			<motion.div className="main-container"
 						initial={{ opacity: 0}}
-						animate={{opacity: 1, transition: { delay: 0.7, duration: 1 }, height: "auto" }}
+						animate={{opacity: 1, transition: { delay: 0.5, duration: 0.7 }, height: "auto" }}
 						exit={{ opacity: 0, transition: {duration: 1}}}>
 				{/* <AnimatePresence mode="wait">
 					{!showTalkPage && */}
