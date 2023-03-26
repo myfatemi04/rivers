@@ -11,9 +11,8 @@ function ChatMessage({ message }) {
 	const [expanded, setExpanded] = useState(true)
 	return <motion.div
 		onTap={() => setExpanded(!expanded)}
-		animate={{height: expanded ? "auto" : 46}}
-		style={{
-		overflow: "hidden", marginBottom: "20px", height: "auto", display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
+		//animate={{height: expanded ? "auto" : 46}}
+		style={{marginBottom: "20px", height: "auto", display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
 	}}>
 		<span className={`chat-message cm-${message.role}`}
 				style={{marginBottom: "-2px"}}>
@@ -43,7 +42,7 @@ function ChatMessage({ message }) {
 						width: "100%",
 					}}>
 						"<em>
-							{expanded ? message.stories : quote}
+							{quote}
 						</em>"
 						<br />
 						<Link to="/story">Read this story</Link>
