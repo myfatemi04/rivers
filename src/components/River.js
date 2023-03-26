@@ -77,12 +77,14 @@ function Line({ line, depth, y, x, maxOffset = null }) {
 
 	const baseWidth = ref.current?.clientWidth;
 
+	const totalWidth = baseWidth * 2 + 8 / depth;
+
 	return <>
 		<span style={{
 			position: 'absolute',
 			overflow: "visible",
 			whiteSpace: "nowrap",
-			left: offset + "px",
+			left: (offset % totalWidth) + "px",
 			fontSize: fontSize + "px",
 			top: y,
 			opacity,
@@ -97,7 +99,7 @@ function Line({ line, depth, y, x, maxOffset = null }) {
 				position: 'absolute',
 				overflow: "visible",
 				whiteSpace: "nowrap",
-				left: (offset - baseWidth - 8 / depth) + "px",
+				left: ((offset - baseWidth - 8 / depth) % totalWidth) + "px",
 				fontSize: fontSize + "px",
 				top: y,
 				opacity,
@@ -119,16 +121,16 @@ export default function River() {
 		)
 	}, [counter]);
 
-	const [injected, setInjected] = useState(false);
+	// const [injected, setInjected] = useState(false);
 
-	return <div style={{ position: "absolute", inset: 0 }}>
-		<button onClick={() => setInjected(true)} style={{ zIndex: -10, cursor: "pointer" }}>
+	return <div style={{ position: "absolute", inset: 0, zIndex: -1 }}>
+		{/* <button onClick={() => setInjected(true)} style={{ zIndex: -10, cursor: "pointer" }}>
 			Inject
-		</button>
+		</button> */}
 
-		{LINES.map((line, index) => <Line key={index} line={line} depth={depths[index]} y={ys[index] + 4 * Math.sin(counter / 75 * Math.PI)} x={xs[index]} />)}
+		{LINES.map((line, index) => <Line key={index} line={line} depth={depths[index]} y={ys[index] + 8 * Math.sin(counter / 75 * Math.PI + xs[index])} x={xs[index]} />)}
 
-		{injected &&
-			<Line line="Hello" depth={0.5} y={100} x={-10 * getBaseSize("Hello")} maxOffset={100} />}
+		{/* {injected &&
+			<Line line="Hello" depth={0.5} y={100} x={-10 * getBaseSize("Hello")} maxOffset={100} />} */}
 	</div>
 }

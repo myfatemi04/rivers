@@ -14,12 +14,23 @@ function ChatMessage({ message }) {
 			</pre>
 			{message.quotes && message.quotes.length > 0 && <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
 				{message.quotes.map((quote, index) => {
-					if (!quote) {
-						return null;
-					}
+					quote = "Test";
+					// if (!quote) {
+					// 	return null;
+					// }
 
-					return <div>
-						<b>Quote from story:</b> {quote}
+					return <div style={{
+						// translucent background
+						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						color: "black",
+						borderRadius: "0.25rem",
+						padding: "1rem",
+						marginTop: "0.5rem",
+						width: "100%",
+					}}>
+						"<em>
+							{quote}
+						</em>"
 					</div>;
 				})}
 			</div>}
