@@ -2,41 +2,49 @@ import ChatMessages from "../components/ChatMessages";
 import { useState, useCallback, useEffect } from 'react';
 import { getStories, chat } from '../api';
 import { Link } from "react-router-dom";
+import {AnimatePresence, motion, usePresence} from "framer-motion";
 
 export default function Talk() {
 	const [initialMessage, setInitialMessage] = useState("");
 	const [stories, setStories] = useState(null);
+	const [isPresent, safeToRemove] = usePresence()
 
 	useEffect(() => {
+		!isPresent && setTimeout(safeToRemove, 1000)
 		if (!initialMessage) {
 			return;
 		}
 		getStories(initialMessage).then(setStories);
-	}, [initialMessage]);
+	}, [initialMessage, isPresent]);
 
-	return <div className="flex-col smooth-height" style={{
-		alignItems: "center",
-		flexGrow: 1,
-		minHeight: 0,
-		width: "calc(min(60rem, 100% - 2rem))",
-		margin: "1rem auto",
-		padding: "1rem 2rem",
-		fontSize: "0.875rem",
-		backgroundColor: "rgb(255, 255, 255, 0.2)",
-		backdropFilter: "blur(50px)",
-		borderRadius: "2rem",
-		zIndex: 1
-	}}>
+	return <motion.div
+		className="flex-col smooth-height"
+		style={{
+			alignItems: "center",
+			flexGrow: 1,
+			minHeight: 0,
+			width: "calc(min(60rem, 100% - 2rem))",
+			margin: "1rem auto",
+			padding: "1rem 2rem",
+			fontSize: "0.875rem",
+			backgroundColor: "rgb(255, 255, 255, 0.2)",
+			backdropFilter: "blur(50px)",
+			borderRadius: "2rem",
+			zIndex: 1}}
+		initial={{ opacity: 0}}
+		animate={{opacity: 1}}
+		exit={{opacity: 0}}>
 		<h1>Find Your Flow</h1>
 		<div>
 			<Link to='/' className="button" style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>Back</Link> <a href='/talk' className="button" style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>New</a>
 		</div>
+		<AnimatePresence>
 		{initialMessage ? (
 			stories === null ?
-				<p>Connecting you to an AI...</p> :
+				<motion.p initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>Connecting you to an AI...</motion.p> :
 				<TalkInner initialMessage={initialMessage} stories={stories} />
 		) : (
-			<div style={{ width: "100%" }}>
+			<motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} style={{ width: "100%" }}>
 				<p>What would you like to talk about?</p>
 				<input type="text" onKeyUp={e => {
 					if (e.key === 'Enter') {
@@ -45,9 +53,10 @@ export default function Talk() {
 				}} className="chat-input" style={{
 					outline: 'none'
 				}} />
-			</div>
+			</motion.div>
 		)}
-	</div>
+		</AnimatePresence>
+	</motion.div>
 }
 
 function TalkInner({ initialMessage, stories }) {

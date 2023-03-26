@@ -164,6 +164,14 @@ button.link {
   display: "inline-block";
 }
 
+.button {
+  background-color: transparent;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  display: "inline-block";
+}
+
 .button:not(:hover) {
   background-color: transparent;
   color: white;

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import { Fragment, useState } from "react";
 
 const nameMap = {
@@ -61,7 +61,7 @@ function ChatMessage({ message, stories }) {
 			<pre>
 				{extractAndInlineQuotesFromContent(message.content, setViewingStory)}
 			</pre>
-			{viewingStory !== null && <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }} onClick={() => setViewingStory(null)}>
+			{viewingStory !== null && <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1}} onClick={() => setViewingStory(null)}>
 				<div onClick={e => e.stopPropagation()} style={{
 					position: "absolute",
 					width: "40rem",
@@ -74,7 +74,7 @@ function ChatMessage({ message, stories }) {
 					left: "50%",
 					top: "50%",
 					transform: "translateX(-50%) translateY(-50%)",
-					boxShadow: "0 0 10rem rgba(0, 0, 0, 0.5)"
+					boxShadow: "0 0 10rem rgba(0, 0, 0, 0.7)"
 				}}>
 					<b>Submitted: {unixTimeToHuman(stories[viewingStory - 1].timestamp)}</b>
 					<pre>
@@ -94,13 +94,17 @@ export default function ChatMessages({ messages, assistantTyping, stories }) {
 	const [expanded, setExpanded] = useState(false)
 
 	return (
-		<div style={{
+		<AnimatePresence>
+		<motion.div style={{
 			overflowY: "scroll", width: "100%", flexGrow: 1, minHeight: 0
-		}} className="flex-col">
+		}} className="flex-col"
+			animate={{ opacity: 1}}
+			initial={{opacity: 0}}>
 			{messages.map((message, index) => (
 				<ChatMessage key={index} message={message} expanded={expanded} setExpanded={setExpanded} stories={stories} />
 			))}
 			{assistantTyping && <ChatMessage message={{ role: 'assistant', content: <i>Typing...</i> }} stories={stories} />}
-		</div>
+		</motion.div>
+		</AnimatePresence>
 	);
 }
