@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { addStory } from "../api";
-import SplitType from "split-type";
+//import SplitType from "split-type";
 import "./Share.css";
 
 export default function Share() {
