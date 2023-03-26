@@ -13,13 +13,13 @@ export default function Talk() {
 		getStories(initialMessage).then(setStories);
 	}, [initialMessage]);
 
-	return <div className="flex-col" style={{
+	return <div className="flex-col smooth-height" style={{
 		alignItems: "center",
 		flexGrow: 1,
+		minHeight: 0,
 		width: "calc(min(60rem, 100% - 2rem))",
 		margin: "1rem auto",
 		padding: "1rem",
-		height: "100%",
 		fontSize: "0.875rem",
 		backgroundColor: "rgb(255, 255, 255, 0.2)",
 		backdropFilter: "blur(50px)",
@@ -38,7 +38,7 @@ export default function Talk() {
 					if (e.key === 'Enter') {
 						setInitialMessage(e.target.value);
 					}
-				}} />
+				}} className="chat-input" />
 			</div>
 		)}
 	</div>
