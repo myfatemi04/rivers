@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { AnimatePresence} from "framer-motion";
 import "./Home.css";
 
 export default function Home() {
 	return (
 		<>
-			<div className="main-container" animate={{ transition: { ease: "easeIn", duration: 0.5 }, height: "auto" }}>
+			<AnimatePresence>
+			<motion.div className="main-container"
+						initial={{ opacity: 0}}
+						viewport={{ once: true }}
+						animate={{opacity: 1, transition: { delay: 0.7, duration: 1 }, height: "auto" }}>
 				{/* <AnimatePresence mode="wait">
 					{!showTalkPage && */}
 				<motion.div initial={{ opacity: 1 }} exit={{ opacity: 0, transition: { type: "tween", duration: 0.15 } }} style={{ padding: "4rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -20,7 +25,8 @@ export default function Home() {
 						<Link to="/share" className="button" style={{ marginLeft: "0.5rem" }}>Share a story</Link>
 					</div>
 				</motion.div>
-			</div>
+			</motion.div>
+			</AnimatePresence>
 		</>
 	);
 }
