@@ -16,7 +16,7 @@ let _lines = `
 
 // _lines = ['a', 'b', 'c', 'd']
 
-const heightBlockCount = 25; // Increase from 10 to 25 for more lines
+const heightBlockCount = 15; // Increase from 10 to 25 for more lines
 
 const LINES = [];
 
@@ -29,25 +29,22 @@ const ys = [];
 const xs = [];
 const speedMultipliers = [];
 
-const baseDepths = [[0.7, 0.9], [0.8, 1.3]];
+const baseDepths = [[0.7, 0.9, 1.5], [0.8, 1.3, 1.1]];
 
 for (let heightBlockI = 0; heightBlockI < heightBlockCount; heightBlockI++) {
 	const baseHeight = ((heightBlockI) / (heightBlockCount - 1)) * height;
 	for (let baseDepthI = 0; baseDepthI < baseDepths[0].length; baseDepthI++) {
 		let line = _lines[Math.floor(Math.random() * _lines.length)];
-		line = line.substring(Math.floor(Math.random() * line.length),line.length);// start the line from a random position
+		// line = line.substring(Math.floor(Math.random() * line.length), line.length);// start the line from a random position
 		LINES.push(line);
 		depths.push(baseDepths[heightBlockI % baseDepths.length][baseDepthI] + Math.random() * 0.05);
 		ys.push(baseHeight + (Math.random() * 0.05) * height);
-		if (heightBlockI < 26) {
-			xs.push(width);
-		} else {
-			xs.push(Math.random() * 1000);
-		}
+		xs.push(Math.random() * -1000);
 		speedMultipliers.push(1 + Math.random() * 0.5);
 	}
 }
 
+// eslint-disable-next-line no-unused-vars
 function getBaseSize(text) {
 	// Gets size of text at 1px font size
 	const span = document.createElement('span');
