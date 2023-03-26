@@ -1,57 +1,60 @@
+import { motion } from "framer-motion";
+import { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
-import {motion} from "framer-motion";
-import {useState, Children} from "react";
-//import React from "react";
 
 const nameMap = {
 	assistant: "AI",
 	user: "You",
 }
 
-/*function extractQuotes(paragraph) {
-	// Use regex to match the quotes and extract their content
-	const regex = /\[\d+,\s"([^"]+)"\]/g;
-	const quotes = [];
-	const result = Children.map(paragraph.props.children, (child) => {
-		if (typeof child === "string") {
-			// If the child is a string, replace the quotes with extracted text on separate lines
-			return child.replace(regex, '<span class="quote">$1</span>\n');
-		}
-	});
+function smartTrim(string) {
+	string = string.trim();
+	string = string.replace(/^[,.!?]\s*/, '');
+	return string;
+}
 
-	return { quotes, result };
-}*/
-function extractQuotes(paragraph) {
-	try {
-		// Use regex to match the quotes and extract their content
-		const regex = /\[\d+,\s"([^"]+)"\]/g;
-		const quotes = paragraph.match(regex);
-
-		// Replace the original quotes in the paragraph with the extracted text on separate lines
-		const result = paragraph.replace(regex, '<span class="quote">$1</span>');
-
-		return {quotes, result};
-	} catch {
-		const result = "";
-		const quotes = "";
-		return {quotes, result};
+function extractAndInlineQuotesFromContent(content, storyVectorIDs = []) {
+	if (typeof content !== 'string') {
+		return [content];
 	}
+	// Match quotation marks followed by a number in square brackets. Match each.
+	const matches = content.split(/("[^"]+" \[\d+\])/g);
+	return matches.map((match, i) => {
+		// This is the delimiter
+		if ((i % 2) === 1) {
+			const number = match.slice(match.lastIndexOf('[') + 1, match.lastIndexOf(']'));
+			// Remove the quotation marks
+			let quote = match.slice(0, match.lastIndexOf('[') - 1).trim().slice(1, -1);
+			return <div key={i} style={{ backgroundColor: "white", color: "black", borderRadius: "0.25rem", display: "block", padding: "0.5rem", margin: "0.5rem 0" }}>
+				<em>
+					{quote}
+				</em>
+				<br />
+				<Link to={"/stories/" + storyVectorIDs[number]} style={{ fontSize: "0.875em" }}>Read the full story</Link>
+			</div>
+		} else {
+			// So we can key them
+			return <Fragment key={i}>
+				{smartTrim(match)}
+			</Fragment>
+		}
+	})
 }
 
 function ChatMessage({ message }) {
-	const [expanded, setExpanded] = useState(true);
-	const text = message.content;
-	console.log(text)
-	const { quotes, result } = extractQuotes(text);
+	const [expanded, setExpanded] = useState(true)
 	return <motion.div
 		onTap={() => setExpanded(!expanded)}
 		//animate={{height: expanded ? "auto" : 46}}
-		style={{marginBottom: "20px", height: "auto", display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
-	}}>
+		style={{
+			marginBottom: "20px", height: "auto", display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
+		}}>
 		<span className={`chat-message cm-${message.role}`}
-				style={{marginBottom: "-2px"}}>
+			style={{ marginBottom: "-2px" }}>
 			<b>{nameMap[message.role]}</b><br />
-			<pre dangerouslySetInnerHTML={{__html: result}}></pre>
+			<pre>
+				{extractAndInlineQuotesFromContent(message.content)}
+			</pre>
 		</span>
 	</motion.div>
 }
@@ -64,7 +67,7 @@ export default function ChatMessages({ messages, assistantTyping }) {
 			overflowY: "scroll", width: "100%", flexGrow: 1, minHeight: 0
 		}} className="flex-col">
 			{messages.map((message, index) => (
-				<ChatMessage key={index} message={message} expanded={expanded} setExpanded={setExpanded}  />
+				<ChatMessage key={index} message={message} expanded={expanded} setExpanded={setExpanded} />
 			))}
 			{assistantTyping && <ChatMessage message={{ role: 'assistant', content: <i>Typing...</i> }} />}
 		</div>
