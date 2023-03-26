@@ -13,7 +13,7 @@ export default function Home() {
 					<p>Rivers collects the world's stories so anyone experiencing challenging times can know they aren't alone.<br />100% free, no registration required.</p>
 
 					<p style={{fontSize: "1.5rem", marginBottom: "0.5rem"}}>
-						What would you like to do?
+						I want to...
 					</p>
 					<div className="buttons">
 						<Link to="/talk" className="button">Talk</Link>
