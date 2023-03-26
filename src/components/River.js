@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 
 let _lines = `
 	"When I was struggling with depression and anxiety, I decided to seek professional help. I was hesitant at first, but I knew I needed to do something to improve my mental health. After a few weeks of therapy, I started to notice some positive changes. I felt more in control of my emotions, and my anxiety attacks were becoming less frequent. With the help of my therapist, I learned some valuable coping mechanisms and was able to regain a sense of normalcy in my life.",
@@ -14,7 +14,7 @@ let _lines = `
 	"I'll never forget the day when I hit rock bottom. I had been struggling with depression and anxiety for years, but I always managed to keep my head above water. However, on that day, everything fell apart.\n\nI couldn't get out of bed, my mind was racing with negative thoughts, and I felt like a complete failure. I didn't have the energy to eat or shower, and the idea of facing the world seemed unbearable.\n\nDespite feeling isolated and alone, I knew I needed help. My therapist had given me a list of emergency contacts, and I forced myself to call a crisis hotline. It was scary to reach out to strangers, but their empathy and support made a world of difference.\n\nWithin a few days, I had an appointment with a psychiatrist who prescribed medication to help manage my symptoms. It wasn't a magic cure, and I had to experiment with different doses and types of medication before finding what worked for me.\n\nIn addition to medication, I also started attending therapy sessions on a regular basis. It was a safe space to talk about my emotions and address the root causes of my mental health struggles. My therapist was always compassionate and non-judgmental, and it felt good to have someone in my corner.\n\nOver time, I slowly started to see the light at the end of the tunnel. I had good days and bad days, but overall, my mental health was improving. I learned coping strategies to manage my anxiety and depression, and I practiced self-care every day.\n\nToday, I'm not completely free of mental health struggles, but I'm in a much better place than I was before. I'm grateful for the support I received and the lessons I learned along the way. It's important to remember that mental health is a journey, and there's no shame in asking for help along the way.",
 `.trim().split('\n');
 
-_lines = ['a', 'b', 'c', 'd']
+// _lines = ['a', 'b', 'c', 'd']
 
 const heightBlockCount = 10;
 
