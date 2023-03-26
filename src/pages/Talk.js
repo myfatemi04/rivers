@@ -32,7 +32,15 @@ export default function Talk() {
 		getStories(initialMessage).then(setStories);
 	}, [initialMessage]);
 
-	return <div className="flex-col" style={{ alignItems: "center", flexGrow: 1, width: "calc(min(40rem, 100% - 2rem))", margin: "0 auto", padding: "1rem", height: "100%" }}>
+	return <div className="flex-col" style={{
+		alignItems: "center",
+		flexGrow: 1,
+		width: "calc(min(60rem, 100% - 2rem))",
+		margin: "0 auto",
+		padding: "1rem",
+		height: "100%",
+		fontSize: "0.875rem",
+	}}>
 		<h1>Talk</h1>
 		{initialMessage ? (
 			stories === null ?
