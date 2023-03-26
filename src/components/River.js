@@ -48,22 +48,34 @@ function getBaseSize(text) {
 	return size;
 }
 
-function Line({ line, depth, y, x }) {
+function Line({ line, depth, y, x, maxOffset = null }) {
 	const [offset, setOffset] = useState(x);
 	const speed = 0.5 / depth;
 	useEffect(() => {
 		const id = requestAnimationFrame(
-			() => setOffset(offset => offset + speed)
+			() => {
+				if (maxOffset != null) {
+					// Decelerate
+					let nominalSpeed = speed;
+					if (maxOffset !== null && maxOffset - offset < 100) {
+						nominalSpeed = Math.max(speed * 0.01, speed * (maxOffset - offset) / 75);
+					}
+					setOffset(offset => Math.min(maxOffset, offset + nominalSpeed));
+				} else {
+					setOffset(offset => offset + speed);
+				}
+			}
 		)
 		return () => cancelAnimationFrame(id);
-	}, [offset, speed]);
+	}, [maxOffset, offset, speed]);
 
-	const baseWidth = useMemo(() => getBaseSize(line), [line]);
 	const fontSize = 20 / depth;
 
 	const ref = useRef();
 
 	const opacity = 1 - depth * depth;
+
+	const baseWidth = ref.current?.clientWidth;
 
 	return <>
 		<span style={{
@@ -76,21 +88,23 @@ function Line({ line, depth, y, x }) {
 			opacity,
 			color: 'transparent',
 			display: "inline-block",
-			textShadow: `0 0 ${Math.max(0, (depth - 0.5)) * 2}px #fff`
+			textShadow: `0 0 ${Math.max(0, (depth - 0.5)) * 2}px #fff`,
+			pointerEvents: 'none'
 		}} ref={ref}>
 			{line}
-		</span>{ref.current &&
+		</span>{ref.current && (maxOffset === null) &&
 			<span style={{
 				position: 'absolute',
 				overflow: "visible",
 				whiteSpace: "nowrap",
-				left: (offset - baseWidth * (fontSize / 10)) + "px",
+				left: (offset - baseWidth - 8 / depth) + "px",
 				fontSize: fontSize + "px",
 				top: y,
 				opacity,
 				color: 'transparent',
 				display: "inline-block",
-				textShadow: `0 0 ${Math.max(0, (depth - 0.5)) * 2}px #fff`
+				textShadow: `0 0 ${Math.max(0, (depth - 0.5)) * 2}px #fff`,
+				pointerEvents: 'none'
 			}}>
 				{line}
 			</span>}
@@ -105,7 +119,16 @@ export default function River() {
 		)
 	}, [counter]);
 
+	const [injected, setInjected] = useState(false);
+
 	return <div style={{ position: "absolute", inset: 0 }}>
+		<button onClick={() => setInjected(true)} style={{ zIndex: -10, cursor: "pointer" }}>
+			Inject
+		</button>
+
 		{LINES.map((line, index) => <Line key={index} line={line} depth={depths[index]} y={ys[index] + 4 * Math.sin(counter / 75 * Math.PI)} x={xs[index]} />)}
+
+		{injected &&
+			<Line line="Hello" depth={0.5} y={100} x={-10 * getBaseSize("Hello")} maxOffset={100} />}
 	</div>
 }
