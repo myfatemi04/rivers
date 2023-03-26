@@ -6,14 +6,36 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #590898, #ff560e);
+  background-size: 400%, 400%;
   height: 100vh;
   color: white;
   overflow: hidden;
+
+  -webkit-animation: bgAnim 41s ease infinite;
+  -moz-animation: bgAnim 41s ease infinite;
+  animation: bgAnim 41s ease infinite;
+}
+
+@-webkit-keyframes bgAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes bgAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes bgAnim {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 * {
   line-height: 1.5em;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
@@ -125,6 +147,6 @@ button,
   backdrop-filter: blur(10px);
 
   /* Make the background color transparent */
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.14);
   /*box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);*/
 }
