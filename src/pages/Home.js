@@ -1,12 +1,6 @@
-import { useEffect } from "react";
 import "./Home.css";
 
 export default function Home() {
-	useEffect(() => {
-		requestAnimationFrame(() => {
-
-		});
-	}, []);
 	return (
 		<div className="main-container">
 			<div style={{ display: "flex", flexDirection: "column", margin: "4rem", alignItems: "center" }}>

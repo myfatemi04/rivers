@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import River from "./components/River";
 import Home from "./pages/Home";
 import Share from "./pages/Share";
 import Talk from "./pages/Talk";
@@ -11,6 +12,7 @@ export default function App() {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/river" element={<River />} />
       <Route path="/share" element={<Share />} />
       <Route path="/talk" element={<Talk />} />
     </Routes>
