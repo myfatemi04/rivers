@@ -27,6 +27,7 @@ const height = window.innerHeight * 1.1;
 
 const ys = [];
 const xs = [];
+const speedMultipliers = [];
 
 const baseDepths = [[0.5, 0.9], [0.8, 1.3]];
 
@@ -38,6 +39,7 @@ for (let heightBlockI = 0; heightBlockI < heightBlockCount; heightBlockI++) {
 		depths.push(baseDepths[heightBlockI % baseDepths.length][baseDepthI] + Math.random() * 0.05);
 		ys.push(baseHeight + (Math.random() * 0.05) * height);
 		xs.push(Math.random() * 1000);
+		speedMultipliers.push(1 + Math.random() * 0.5);
 	}
 }
 
@@ -54,9 +56,9 @@ function getBaseSize(text) {
 	return size;
 }
 
-function Line({ line, depth, y, x, maxOffset = null }) {
+function Line({ line, depth, y, x, speedMultiplier, maxOffset = null }) {
 	const [offset, setOffset] = useState(x);
-	const speed = -0.5 / depth;
+	const speed = -0.5 / depth * speedMultiplier;
 	useEffect(() => {
 		const id = requestAnimationFrame(
 			() => {
@@ -138,7 +140,7 @@ export default function River() {
 			Inject
 		</button> */}
 
-		{LINES.map((line, index) => <Line key={index} line={line} depth={depths[index]} y={ys[index] + 8 * Math.sin(counter / 75 * Math.PI + xs[index])} x={xs[index]} />)}
+		{LINES.map((line, index) => <Line key={index} line={line} depth={depths[index]} y={ys[index] + 8 * Math.sin(counter / 75 * Math.PI + xs[index])} x={xs[index]} speedMultiplier={speedMultipliers[index]} />)}
 
 		{/* {injected &&
 			<Line line="Hello" depth={0.5} y={100} x={-10 * getBaseSize("Hello")} maxOffset={100} />} */}
