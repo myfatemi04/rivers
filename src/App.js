@@ -8,12 +8,15 @@ export default function App() {
   /*
   Linear gradient from #590898 to #FF560E at 45 degree angle
   */
-  return <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/share" element={<Share />} />
-      <Route path="/talk" element={<Talk />} />
-      <Route path="/river" element={<River />} />
-    </Routes>
-  </BrowserRouter>
+  return <>
+    <River />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/share" element={<Share />} />
+        <Route path="/talk" element={<Talk />} />
+        <Route path="/river" element={<River />} />
+      </Routes>
+    </BrowserRouter>
+  </>
 }

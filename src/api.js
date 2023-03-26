@@ -25,7 +25,12 @@ export async function addStory(story) {
 export async function chat(messages, retrievedStories) {
 	const result = await fetch(CHAT_URL, {
 		method: "POST",
-		body: JSON.stringify({ messages, retrieved_stories: retrievedStories }),
+		body: JSON.stringify({
+			messages: messages.map(message => {
+				// Remove extra fields that may have been added
+				return { role: message.role, content: message.content }
+			}), retrieved_stories: retrievedStories
+		}),
 		headers: {
 			"Content-Type": "application/json"
 		}

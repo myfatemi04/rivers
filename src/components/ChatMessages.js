@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const nameMap = {
 	assistant: "AI",
 	user: "You",
@@ -14,14 +16,16 @@ function ChatMessage({ message }) {
 			</pre>
 			{message.quotes && message.quotes.length > 0 && <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
 				{message.quotes.map((quote, index) => {
-					quote = "Test";
-					// if (!quote) {
-					// 	return null;
-					// }
+					if (!quote) {
+						return null;
+					}
+					if (quote.startsWith('"') && quote.endsWith('"')) {
+						quote = quote.substring(1, quote.length - 1);
+					}
 
 					return <div style={{
 						// translucent background
-						backgroundColor: "rgba(0, 0, 0, 0.5)",
+						backgroundColor: "rgba(255, 255, 255, 0.5)",
 						color: "black",
 						borderRadius: "0.25rem",
 						padding: "1rem",
@@ -31,6 +35,8 @@ function ChatMessage({ message }) {
 						"<em>
 							{quote}
 						</em>"
+						<br />
+						<Link to="/story">Read this story</Link>
 					</div>;
 				})}
 			</div>}
@@ -41,7 +47,7 @@ function ChatMessage({ message }) {
 export default function ChatMessages({ messages, assistantTyping }) {
 	return (
 		<div style={{
-			overflowY: "auto", width: "100%", flexGrow: 1, minHeight: 0,
+			overflowY: "auto", width: "100%", flexGrow: 1, minHeight: 0
 		}} className="flex-col">
 			{messages.map((message, index) => (
 				<ChatMessage key={index} message={message} />

@@ -40,6 +40,9 @@ export default function Talk() {
 		padding: "1rem",
 		height: "100%",
 		fontSize: "0.875rem",
+		backgroundColor: "rgb(255, 255, 255, 0.2)",
+		backdropFilter: "blur(50px)",
+		zIndex: 1
 	}}>
 		<h1>Talk</h1>
 		{initialMessage ? (
