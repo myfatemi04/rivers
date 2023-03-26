@@ -9,9 +9,20 @@ function ChatMessage({ message }) {
 	}}>
 		<span className={`chat-message cm-${message.role}`}>
 			<b>{nameMap[message.role]}</b><br />
-			<pre >
+			<pre>
 				{message.content}
 			</pre>
+			{message.quotes && message.quotes.length > 0 && <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+				{message.quotes.map((quote, index) => {
+					if (!quote) {
+						return null;
+					}
+
+					return <div>
+						<b>Quote from story:</b> {quote}
+					</div>;
+				})}
+			</div>}
 		</span>
 	</div>
 }
