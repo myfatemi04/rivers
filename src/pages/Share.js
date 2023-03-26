@@ -1,11 +1,17 @@
-import { useCallback, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { addStory } from "../api";
+import {motion, usePresence} from "framer-motion";
 import "./Share.css";
 
 export default function Share() {
 	const [story, setStory] = useState("");
 	const [status, setStatus] = useState("idle");
+	const [isPresent, safeToRemove] = usePresence()
+
+	useEffect(() => {
+		!isPresent && setTimeout(safeToRemove, 1000)
+	}, [isPresent])
 
 	const submitButton = useCallback(async () => {
 		if (!story) {
@@ -23,7 +29,11 @@ export default function Share() {
 
 	// I used to have a lot of anxiety about tests. However, I found that breaking my studying into really small chunks helped me out a lot.
 
-	return <div className="share-container">
+	return <motion.div
+		className="share-container"
+		initial={{opacity: 0}}
+		animate={{opacity: 1}}
+		exit={{opacity:0}}>
 		<div style={{
 			display: "flex", flexDirection: "column", width: "40rem", margin: "0.5rem auto", alignItems: "center"
 		}}>
@@ -46,5 +56,5 @@ export default function Share() {
 				</>
 			}
 		</div>
-	</div>
+	</motion.div>
 }
