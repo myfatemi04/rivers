@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { AnimatePresence} from "framer-motion";
 import "./Home.css";
 
 export default function Home() {
