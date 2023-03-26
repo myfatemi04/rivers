@@ -17,12 +17,13 @@ export default function Talk() {
 		alignItems: "center",
 		flexGrow: 1,
 		width: "calc(min(60rem, 100% - 2rem))",
-		margin: "0 auto",
+		margin: "1rem auto",
 		padding: "1rem",
 		height: "100%",
 		fontSize: "0.875rem",
 		backgroundColor: "rgb(255, 255, 255, 0.2)",
 		backdropFilter: "blur(50px)",
+		borderRadius: "2rem",
 		zIndex: 1
 	}}>
 		<h1>Talk</h1>
