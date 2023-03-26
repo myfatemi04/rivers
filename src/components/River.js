@@ -16,7 +16,7 @@ let _lines = `
 
 // _lines = ['a', 'b', 'c', 'd']
 
-const heightBlockCount = 15; // Increase from 10 to 25 for more lines
+const heightBlockCount = 25; // Increase from 10 to 25 for more lines
 
 const LINES = [];
 
