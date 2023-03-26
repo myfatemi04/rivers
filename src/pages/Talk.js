@@ -15,7 +15,7 @@ export default function Talk() {
 			return;
 		}
 		getStories(initialMessage).then(setStories);
-	}, [initialMessage, isPresent]);
+	}, [initialMessage, isPresent, safeToRemove]);
 
 	return <motion.div
 		className="flex-col smooth-height"
