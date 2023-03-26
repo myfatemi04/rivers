@@ -70,7 +70,7 @@ function TalkInner({ initialMessage, stories }) {
 		if (messages[messages.length - 1].role === 'user') {
 			setTyping(true);
 			chat(messages, stories).then((result) => {
-				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes, stories: result.stories }]);
+				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes}]);
 			}).finally(() => {
 				setTyping(false);
 			});
