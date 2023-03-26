@@ -1,3 +1,7 @@
+a {
+  transition: all 0.6s ease;
+}
+
 a:link {
   text-decoration: none;
 }
@@ -20,6 +24,12 @@ a:active {
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+}
+
+.button:hover {
+  background-color: #b5b5b6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.6s ease;
 }
 
 .chat-input {
