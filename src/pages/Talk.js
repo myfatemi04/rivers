@@ -29,7 +29,7 @@ export default function Talk() {
 	}}>
 		<h1>Find Your Flow</h1>
 		<div>
-			<Link to='/'>Back</Link>, <a href='/talk'>New</a>
+			<Link to='/' className="button.link">Back</Link> <a href='/talk' className="button.link">New</a>
 		</div>
 		{initialMessage ? (
 			stories === null ?
