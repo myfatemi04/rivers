@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 
 let _lines = `
 	"When I was struggling with depression and anxiety, I decided to seek professional help. I was hesitant at first, but I knew I needed to do something to improve my mental health. After a few weeks of therapy, I started to notice some positive changes. I felt more in control of my emotions, and my anxiety attacks were becoming less frequent. With the help of my therapist, I learned some valuable coping mechanisms and was able to regain a sense of normalcy in my life.",
@@ -84,6 +84,10 @@ function Line({ line, depth, y, x, maxOffset = null }) {
 	const baseWidth = ref.current?.clientWidth;
 
 	const totalWidth = baseWidth * 2 + 8 / depth;
+
+	if (offset + totalWidth < 0) {
+		setOffset(window.innerWidth);
+	}
 
 	return <>
 		<span style={{

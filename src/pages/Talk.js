@@ -26,14 +26,14 @@ export default function Talk() {
 		borderRadius: "2rem",
 		zIndex: 1
 	}}>
-		<h1>Talk</h1>
+		<h1>Talk to the world's stories</h1>
 		{initialMessage ? (
 			stories === null ?
 				<p>Connecting you to an AI</p> :
 				<TalkInner initialMessage={initialMessage} stories={stories} />
 		) : (
 			<div style={{ width: "100%" }}>
-				<p>What's on your mind?</p>
+				<p>What do you want to talk about?</p>
 				<input type="text" onKeyUp={e => {
 					if (e.key === 'Enter') {
 						setInitialMessage(e.target.value);
