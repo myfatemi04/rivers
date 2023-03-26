@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { CSSTransition } from 'react-transition-group';
 
 const buttonPanelVariants = {
 	visible: {

@@ -1,14 +1,48 @@
 import { Link } from "react-router-dom";
 import {motion} from "framer-motion";
-import {useState} from "react";
+import {useState, Children} from "react";
+//import React from "react";
 
 const nameMap = {
 	assistant: "AI",
 	user: "You",
 }
 
+/*function extractQuotes(paragraph) {
+	// Use regex to match the quotes and extract their content
+	const regex = /\[\d+,\s"([^"]+)"\]/g;
+	const quotes = [];
+	const result = Children.map(paragraph.props.children, (child) => {
+		if (typeof child === "string") {
+			// If the child is a string, replace the quotes with extracted text on separate lines
+			return child.replace(regex, '<span class="quote">$1</span>\n');
+		}
+	});
+
+	return { quotes, result };
+}*/
+function extractQuotes(paragraph) {
+	try {
+		// Use regex to match the quotes and extract their content
+		const regex = /\[\d+,\s"([^"]+)"\]/g;
+		const quotes = paragraph.match(regex);
+
+		// Replace the original quotes in the paragraph with the extracted text on separate lines
+		const result = paragraph.replace(regex, '<span class="quote">$1</span>');
+
+		return {quotes, result};
+	} catch {
+		const result = "";
+		const quotes = "";
+		return {quotes, result};
+	}
+}
+
 function ChatMessage({ message }) {
-	const [expanded, setExpanded] = useState(true)
+	const [expanded, setExpanded] = useState(true);
+	const text = message.content;
+	console.log(text)
+	const { quotes, result } = extractQuotes(text);
 	return <motion.div
 		onTap={() => setExpanded(!expanded)}
 		//animate={{height: expanded ? "auto" : 46}}
@@ -17,38 +51,7 @@ function ChatMessage({ message }) {
 		<span className={`chat-message cm-${message.role}`}
 				style={{marginBottom: "-2px"}}>
 			<b>{nameMap[message.role]}</b><br />
-			<pre>
-				{message.content}
-			</pre>
-			{message.quotes && message.quotes.length > 0 && <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-				{message.quotes.map((quote, index) => {
-					if (!quote) {
-						return null;
-					}
-					if (quote.startsWith('"') && quote.endsWith('"')) {
-						quote = quote.substring(1, quote.length - 1);
-					}
-
-					return <motion.div
-						onClick={() => setExpanded(!expanded)}
-						animate={{ height: expanded ? "auto" : 150}}
-						style={{
-						// translucent background
-						backgroundColor: "rgba(255, 255, 255, 0.5)",
-						color: "black",
-						borderRadius: "0.25rem",
-						padding: "1rem",
-						marginTop: "0.5rem",
-						width: "100%",
-					}}>
-						"<em>
-							{quote}
-						</em>"
-						<br />
-						<Link to="/story">Read this story</Link>
-					</motion.div>;
-				})}
-			</div>}
+			<pre dangerouslySetInnerHTML={{__html: result}}></pre>
 		</span>
 	</motion.div>
 }
