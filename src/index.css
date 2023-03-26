@@ -102,7 +102,8 @@ pre {
 }
 
 .cm-assistant {
-  background-color: rgba(255, 255, 255, 0.382);
+  background-color: rgba(255, 255, 255, 0.779);
+  color: #3a3a3a;
 }
 
 .share-button {
