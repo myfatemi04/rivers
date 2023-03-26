@@ -56,7 +56,7 @@ function getBaseSize(text) {
 
 function Line({ line, depth, y, x, maxOffset = null }) {
 	const [offset, setOffset] = useState(x);
-	const speed = 0.5 / depth;
+	const speed = -0.5 / depth;
 	useEffect(() => {
 		const id = requestAnimationFrame(
 			() => {
@@ -90,7 +90,7 @@ function Line({ line, depth, y, x, maxOffset = null }) {
 			position: 'absolute',
 			overflow: "visible",
 			whiteSpace: "nowrap",
-			left: (offset % totalWidth) + "px",
+			left: (offset) + "px",
 			fontSize: fontSize + "px",
 			top: y,
 			opacity,
@@ -105,7 +105,7 @@ function Line({ line, depth, y, x, maxOffset = null }) {
 				position: 'absolute',
 				overflow: "visible",
 				whiteSpace: "nowrap",
-				left: ((offset - baseWidth - 8 / depth) % totalWidth) + "px",
+				left: ((offset + baseWidth + 8 / depth)) + "px",
 				fontSize: fontSize + "px",
 				top: y,
 				opacity,
