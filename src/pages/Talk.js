@@ -13,32 +13,32 @@ export default function Talk() {
 		getStories(initialMessage).then(setStories);
 	}, [initialMessage]);
 
-	return <div className="flex-col" style={{
+	return <div className="flex-col smooth-height" style={{
 		alignItems: "center",
 		flexGrow: 1,
+		minHeight: 0,
 		width: "calc(min(60rem, 100% - 2rem))",
 		margin: "1rem auto",
 		padding: "1rem",
-		height: "100%",
 		fontSize: "0.875rem",
 		backgroundColor: "rgb(255, 255, 255, 0.2)",
 		backdropFilter: "blur(50px)",
 		borderRadius: "2rem",
 		zIndex: 1
 	}}>
-		<h1>Talk</h1>
+		<h1>Talk to the world's stories</h1>
 		{initialMessage ? (
 			stories === null ?
 				<p>Connecting you to an AI</p> :
 				<TalkInner initialMessage={initialMessage} stories={stories} />
 		) : (
 			<div style={{ width: "100%" }}>
-				<p>What's on your mind?</p>
+				<p>What do you want to talk about?</p>
 				<input type="text" onKeyUp={e => {
 					if (e.key === 'Enter') {
 						setInitialMessage(e.target.value);
 					}
-				}} />
+				}} className="chat-input" />
 			</div>
 		)}
 	</div>
