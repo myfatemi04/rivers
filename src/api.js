@@ -7,8 +7,7 @@ const CHAT_URL = 'https://chat-jxwxpho3rq-uk.a.run.app';
 // const CHAT_URL = 'http://localhost:8080/chat';
 
 export async function getStories(initialMessage) {
-	const result = await fetch(GET_STORIES_URL + '/?query=' + encodeURIComponent(initialMessage)).then(response => response.json());
-	return result;
+	return await fetch(GET_STORIES_URL + '/?query=' + encodeURIComponent(initialMessage)).then(response => response.json());
 }
 
 export async function addStory(story) {
