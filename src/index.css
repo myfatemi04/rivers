@@ -142,11 +142,7 @@ span {
 }
 
 .button {
-  background-color: #007bff;
-  border: 1px solid white;
   border-radius: 0.5rem;
-  background-color: transparent;
-  color: white;
   width: 15rem;
   text-align: center;
   cursor: pointer;
@@ -168,10 +164,15 @@ button.link {
   display: "inline-block";
 }
 
+.button:not(:hover) {
+  background-color: transparent;
+  color: white;
+  mix-blend-mode: screen;
+}
+
 .button:hover {
   background-color: white;
-  color: transparent;
-  background-clip: text;
+  color: #fa52ba;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.6s ease;
 }
