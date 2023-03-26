@@ -26,7 +26,7 @@ export default function Talk() {
 		borderRadius: "2rem",
 		zIndex: 1
 	}}>
-		<h1>Find your flow with AI therapy</h1>
+		<h1>Find Your Flow</h1>
 		{initialMessage ? (
 			stories === null ?
 				<p>Connecting you to an AI...</p> :
