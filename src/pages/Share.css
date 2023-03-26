@@ -20,7 +20,7 @@ textarea {
 }
 
 .textarea:hover {
-  background-color: #b5b5b6;
+  background-color: white;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   opacity: 0.7;
   transition: all 0.8s ease; /* transition duration of 0.5 seconds */
