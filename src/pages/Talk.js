@@ -29,7 +29,7 @@ export default function Talk() {
 	}}>
 		<h1>Find Your Flow</h1>
 		<div>
-			<Link to='/' className="button.link">Back</Link> <a href='/talk' className="button.link">New</a>
+			<Link to='/' className="button" style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>Back</Link> <a href='/talk' className="button" style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>New</a>
 		</div>
 		{initialMessage ? (
 			stories === null ?

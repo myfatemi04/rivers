@@ -28,7 +28,7 @@ export default function Share() {
 			display: "flex", flexDirection: "column", width: "40rem", margin: "0.5rem auto", alignItems: "center"
 		}}>
 			<h1 style={{marginBottom: 0}}>Share Your Experience</h1>
-			<Link to='/'>Back</Link>
+			<Link to='/' className="button" style={{ fontSize: "1rem", padding: "0.5rem 1rem", borderRadius: "0.25rem", width: "initial", marginBottom: "0.5rem" }}>Back</Link>
 			{status === 'success' ? <><p>Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.</p>
 				<button class="button" onClick={() => window.location.reload()}>Submit another</button>
 			</> :
