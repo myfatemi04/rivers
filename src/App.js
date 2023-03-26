@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AnimatePresence} from "framer-motion";
 import River from "./components/River";
 import Home from "./pages/Home";
 import Share from "./pages/Share";
@@ -11,12 +12,14 @@ export default function App() {
   return <>
     <River />
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/share" element={<Share />} />
-        <Route path="/talk" element={<Talk />} />
-        <Route path="/river" element={<River />} />
-      </Routes>
+      <AnimatePresence mode='wait'>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/share" element={<Share />} />
+          <Route path="/talk" element={<Talk />} />
+          <Route path="/river" element={<River />} />
+        </Routes>
+      </AnimatePresence>
     </BrowserRouter>
   </>
 }

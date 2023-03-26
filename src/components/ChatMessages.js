@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import {motion} from "framer-motion";
+import {useState} from "react";
 
 const nameMap = {
 	assistant: "AI",
@@ -6,10 +8,14 @@ const nameMap = {
 }
 
 function ChatMessage({ message }) {
-	return <div style={{
-		display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
+	const [expanded, setExpanded] = useState(true)
+	return <motion.div
+		onTap={() => setExpanded(!expanded)}
+		//animate={{height: expanded ? "auto" : 46}}
+		style={{marginBottom: "20px", height: "auto", display: "flex", justifyContent: message.role === 'assistant' ? "flex-start" : "flex-end",
 	}}>
-		<span className={`chat-message cm-${message.role}`}>
+		<span className={`chat-message cm-${message.role}`}
+				style={{marginBottom: "-2px"}}>
 			<b>{nameMap[message.role]}</b><br />
 			<pre>
 				{message.content}
@@ -23,7 +29,10 @@ function ChatMessage({ message }) {
 						quote = quote.substring(1, quote.length - 1);
 					}
 
-					return <div style={{
+					return <motion.div
+						onClick={() => setExpanded(!expanded)}
+						animate={{ height: expanded ? "auto" : 150}}
+						style={{
 						// translucent background
 						backgroundColor: "rgba(255, 255, 255, 0.5)",
 						color: "black",
@@ -37,20 +46,22 @@ function ChatMessage({ message }) {
 						</em>"
 						<br />
 						<Link to="/story">Read this story</Link>
-					</div>;
+					</motion.div>;
 				})}
 			</div>}
 		</span>
-	</div>
+	</motion.div>
 }
 
 export default function ChatMessages({ messages, assistantTyping }) {
+	const [expanded, setExpanded] = useState(false)
+
 	return (
 		<div style={{
-			overflowY: "auto", width: "100%", flexGrow: 1, minHeight: 0
+			overflowY: "scroll", width: "100%", flexGrow: 1, minHeight: 0
 		}} className="flex-col">
 			{messages.map((message, index) => (
-				<ChatMessage key={index} message={message} />
+				<ChatMessage key={index} message={message} expanded={expanded} setExpanded={setExpanded}  />
 			))}
 			{assistantTyping && <ChatMessage message={{ role: 'assistant', content: <i>Typing...</i> }} />}
 		</div>

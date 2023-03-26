@@ -22,11 +22,11 @@ export default function Share() {
 
 	// I used to have a lot of anxiety about tests. However, I found that breaking my studying into really small chunks helped me out a lot.
 
-	return <div className="main-container">
+	return <div className="share-container">
 		<div style={{
-			display: "flex", flexDirection: "column", width: "40rem", margin: "1rem auto", alignItems: "center"
+			display: "flex", flexDirection: "column", width: "40rem", margin: "0.5rem auto", alignItems: "center"
 		}}>
-			<h1>Share</h1>
+			<h1>Share Your Experience</h1>
 			{status === 'success' ? <><p>Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.</p>
 				<button onClick={() => window.location.reload()}>Submit another</button>
 			</> :

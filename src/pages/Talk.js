@@ -26,19 +26,20 @@ export default function Talk() {
 		borderRadius: "2rem",
 		zIndex: 1
 	}}>
-		<h1>Talk to the world's stories</h1>
+		<h1>Find your flow with AI therapy</h1>
 		{initialMessage ? (
 			stories === null ?
-				<p>Connecting you to an AI</p> :
+				<p>Connecting you to an AI...</p> :
 				<TalkInner initialMessage={initialMessage} stories={stories} />
 		) : (
 			<div style={{ width: "100%" }}>
-				<p>What do you want to talk about?</p>
+				<p>What would you like to talk about?</p>
 				<input type="text" onKeyUp={e => {
 					if (e.key === 'Enter') {
 						setInitialMessage(e.target.value);
 					}
-				}} className="chat-input" />
+				}} className="chat-input" style={{ 
+					outline: 'none' }} /> 
 			</div>
 		)}
 	</div>
@@ -70,7 +71,7 @@ function TalkInner({ initialMessage, stories }) {
 		if (messages[messages.length - 1].role === 'user') {
 			setTyping(true);
 			chat(messages, stories).then((result) => {
-				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes }]);
+				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes}]);
 			}).finally(() => {
 				setTyping(false);
 			});
