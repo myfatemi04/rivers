@@ -1,38 +1,8 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { CSSTransition } from 'react-transition-group';
-
-const buttonPanelVariants = {
-	visible: {
-		opacity: 1,
-		transition: {
-			ease: "easeInOut",
-			duration: 0.5,
-		},
-	},
-	hidden: {
-		opacity: 0,
-	},
-}
-
-const textVariants = {
-	hidden: {
-		opacity: 0,
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			ease: "easeInOut",
-			duration: 0.5,
-		},
-	},
-}
 
 export default function Home() {
-	const [showTalkPage, setShowTalkPage] = useState(false);
-
 	return (
 		<>
 			<div className="main-container" animate={{ transition: { ease: "easeIn", duration: 0.5 }, height: "auto" }}>
