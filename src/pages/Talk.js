@@ -28,7 +28,7 @@ export default function Talk() {
 			padding: "1rem 2rem",
 			fontSize: "0.875rem",
 			backgroundColor: "rgb(255, 255, 255, 0.2)",
-			backdropFilter: "blur(50px)",
+			backdropFilter: "blur(10px)",
 			borderRadius: "2rem",
 			zIndex: 1}}
 		initial={{ opacity: 0}}
