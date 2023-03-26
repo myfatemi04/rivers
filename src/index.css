@@ -157,8 +157,9 @@ span {
 button.link {
   background-color: transparent;
   border: none;
-  color: blue;
+  color: #4c00ff;
   font-size: 1.5rem;
+  font-weight: 400;
   padding: 0;
   cursor: pointer;
   display: "inline-block";
@@ -167,7 +168,7 @@ button.link {
 .button {
   background-color: transparent;
   border: none;
-  color: blue;
+  color: #4c00ff;
   cursor: pointer;
   display: "inline-block";
 }
