@@ -228,7 +228,7 @@ button.link {
   width: 45rem;
   z-index: 1;
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.14);
   border-radius: 30px;
 }
 
