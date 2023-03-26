@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { CSSTransition } from 'react-transition-group';
 
 const buttonPanelVariants = {
 	visible: {
@@ -46,11 +47,6 @@ export default function Home() {
 						<Link to="/share" className="button" style={{ marginLeft: "0.5rem" }}> Share a story </Link>
 					</div>
 				</motion.div>
-				{/* } {showTalkPage &&
-						<motion.div style={{ width: "100%", height: "100%", padding: "4rem" }}>
-							<h1>Let's talk.</h1>
-						</motion.div>} */}
-				{/* </AnimatePresence> */}
 			</div>
 		</>
 	);
