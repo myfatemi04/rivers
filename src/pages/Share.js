@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
 import { addStory } from "../api";
-import SplitType from "split-type";
 import "./Share.css";
 
 export default function Share() {
@@ -27,7 +27,8 @@ export default function Share() {
 		<div style={{
 			display: "flex", flexDirection: "column", width: "40rem", margin: "0.5rem auto", alignItems: "center"
 		}}>
-			<h1>Share Your Experience</h1>
+			<h1 style={{marginBottom: 0}}>Share Your Experience</h1>
+			<Link to='/'>Back</Link>
 			{status === 'success' ? <><p>Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.</p>
 				<button class="button" onClick={() => window.location.reload()}>Submit another</button>
 			</> :

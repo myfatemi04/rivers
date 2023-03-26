@@ -1,6 +1,7 @@
 import ChatMessages from "../components/ChatMessages";
 import { useState, useCallback, useEffect } from 'react';
 import { getStories, chat } from '../api';
+import { Link } from "react-router-dom";
 
 export default function Talk() {
 	const [initialMessage, setInitialMessage] = useState("");
@@ -27,6 +28,9 @@ export default function Talk() {
 		zIndex: 1
 	}}>
 		<h1>Find Your Flow</h1>
+		<div>
+			<Link to='/'>Back</Link>, <a href='/talk'>New</a>
+		</div>
 		{initialMessage ? (
 			stories === null ?
 				<p>Connecting you to an AI...</p> :
@@ -38,8 +42,9 @@ export default function Talk() {
 					if (e.key === 'Enter') {
 						setInitialMessage(e.target.value);
 					}
-				}} className="chat-input" style={{ 
-					outline: 'none' }} /> 
+				}} className="chat-input" style={{
+					outline: 'none'
+				}} />
 			</div>
 		)}
 	</div>
@@ -71,7 +76,7 @@ function TalkInner({ initialMessage, stories }) {
 		if (messages[messages.length - 1].role === 'user') {
 			setTyping(true);
 			chat(messages, stories).then((result) => {
-				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes}]);
+				return setMessages(messages => [...messages, { ...result.message, quotes: result.quotes }]);
 			}).finally(() => {
 				setTyping(false);
 			});
