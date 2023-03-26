@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { addStory } from "../api";
+import SplitType from "split-type";
 import "./Share.css";
 
 export default function Share() {
@@ -28,7 +29,7 @@ export default function Share() {
 		}}>
 			<h1>Share Your Experience</h1>
 			{status === 'success' ? <><p>Thank you so much for sharing. Your stories will give someone going through a similar experience comfort that they aren't alone.</p>
-				<button onClick={() => window.location.reload()}>Submit another</button>
+				<button class="button" onClick={() => window.location.reload()}>Submit another</button>
 			</> :
 				<>
 					<textarea className = 'textarea'value={story} onChange={e => setStory(e.target.value)} disabled={status === 'pending'} style={{
